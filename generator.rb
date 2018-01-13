@@ -1,5 +1,8 @@
 require 'json'
 require 'faker'
+require 'byebug'
+
+Dir["#{File.dirname(__FILE__)}/templates/*.rb"].each { |file| load file }
 
 class Generator
   class << self
@@ -37,64 +40,22 @@ class Generator
     def products_generator_for_category(category_id)
       (1).upto(PRODUCTS_COUNT).map do
         @@id_counter += 1
-        product_template(category_id)
+        ProductTemplate.call(id_counter: @@id_counter, category_id: category_id)
       end
     end
 
     def categories_generator
       (1).upto(CATEGORIES_COUNT).map do |i|
-        category_template(i)
+        CategoryTemplate.call(id: i)
       end
     end
 
     def user_generator
       (1).upto(USER_COUNT).map do |i|
-        user_template(i)
+        UserTemplate.call(id: i)
       end
     end
     # END: generators
-
-    # BEGIN: templates
-    def product_template(category_id)
-      {
-        id: @@id_counter,
-        categoryId: category_id,
-        productName: product_name,
-        productPrice: product_price,
-        productImg: image
-      }
-    end
-
-    def category_template(i)
-      {
-        id: i,
-        categoryName: "Fake category #{i}",
-        categoryImg: image
-      }
-    end
-
-    def user_template(i)
-      {
-        id: i,
-        userName: "Test User #{i}",
-        admin: i.eql?(1) # first user always will be admin
-      }
-    end
-    # END: templates
-
-    # BEGIN: fake data
-    def image
-      Faker::Avatar.image
-    end
-
-    def product_price
-      Faker::Commerce.price.to_s
-    end
-
-    def product_name
-      Faker::Commerce.product_name
-    end
-    # END: fake data
   end
 end
 
