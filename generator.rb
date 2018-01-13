@@ -2,7 +2,9 @@ require 'json'
 require 'faker'
 require 'byebug'
 
+# TODO: remove to generators
 Dir["#{File.dirname(__FILE__)}/templates/*.rb"].each { |file| load file }
+Dir["#{File.dirname(__FILE__)}/generators/*.rb"].each { |file| load file }
 
 class Generator
   class << self
@@ -11,7 +13,7 @@ class Generator
 
     CATEGORIES_COUNT = 15
     PRODUCTS_COUNT = 20
-    USER_COUNT = 5
+    USERS_COUNT = 3
 
     def call
       File.open("./example.json","w") do |f|
@@ -23,9 +25,9 @@ class Generator
 
     def file_structure
       {
-        categories: categories_generator,
+        categories: CategoriesGenerator.call(entity_count: CATEGORIES_COUNT),
         products: products_generator,
-        users: user_generator
+        users: UserGenerator.call(entity_count: USERS_COUNT)
       }
     end
 
@@ -41,18 +43,6 @@ class Generator
       (1).upto(PRODUCTS_COUNT).map do
         @@id_counter += 1
         ProductTemplate.call(id_counter: @@id_counter, category_id: category_id)
-      end
-    end
-
-    def categories_generator
-      (1).upto(CATEGORIES_COUNT).map do |i|
-        CategoryTemplate.call(id: i)
-      end
-    end
-
-    def user_generator
-      (1).upto(USER_COUNT).map do |i|
-        UserTemplate.call(id: i)
       end
     end
     # END: generators
