@@ -1,25 +1,20 @@
-class ProductsGenerator
+require_relative 'base_generator'
+require_relative '../generators/products_for_category_generator'
+
+class ProductsGenerator < BaseGenerator
   class << self
-    CATEGORIES_COUNT = 20
-    @@products_array = 0
-
-    def call(params)
+    def call(params={})
       super(params)
-      @@products_array.flatten!
+      $PRODUCTS_ARRAY.flatten!
     end
 
-    def entity_count
-      CATEGORIES_COUNT
-    end
+    private
 
     def yield_block(params)
-      products_array = params[:products_array]
-      i = params[:i]
-      products_array << products_generator_for_category(i)
-    end
+      products_count = params[:products_count]
+      category_id = params[:id]
 
-    def products_generator_for_category(i)
-      Generators::ProductsForCategory.call(i: i)
+      $PRODUCTS_ARRAY << ProductsForCategoryGenerator.call(entity_count: products_count, category_id: category_id)
     end
   end
 end

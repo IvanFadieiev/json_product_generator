@@ -8,7 +8,7 @@ class ProductTemplate
 
     def call(attrs = {})
       id_counter = attrs[:id_counter]
-      category_id = attrs[:id_counter]
+      category_id = attrs[:category_id]
 
       {
         id: id_counter,
