@@ -1,5 +1,5 @@
 module Image
-  def image
+  def fake_image
     Faker::Avatar.image
   end
 end

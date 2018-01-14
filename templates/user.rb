@@ -1,12 +1,27 @@
-class UserTemplate
+require_relative './base_template'
+
+class UserTemplate < BaseTemplate
+  attr_accessor :id, :avatar
+
+  def initialize(attrs = {})
+    @id = attrs[:id]
+    @avatar = fake_image
+  end
+
   class << self
     def call(attrs = {})
-      id = attrs[:id]
+      obj = new(attrs)
+      template_for(obj)
+    end
 
+    private
+
+    def template_for(obj)
       {
-        id: id,
-        userName: "Test User #{id}",
-        admin: id.eql?(1) # first user always will be admin
+        id: obj.id,
+        userName: "Test User #{obj.id}",
+        userAvatar: obj.avatar,
+        admin: obj.id.eql?(1) # first user always will be admin
       }
     end
   end

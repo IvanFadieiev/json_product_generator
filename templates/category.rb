@@ -1,16 +1,26 @@
-require_relative '../helpers/image'
+require_relative './base_template'
 
-class CategoryTemplate
+class CategoryTemplate < BaseTemplate
+  attr_accessor :id, :image
+
+  def initialize(attrs = {})
+    @id = attrs[:id]
+    @image = fake_image
+  end
+
   class << self
-    include Image
-
     def call(attrs = {})
-      id = attrs[:id]
+      obj = new(attrs)
+      template_for(obj)
+    end
 
+    private
+
+    def template_for(obj)
       {
-        id: id,
-        categoryName: "Fake category #{id}",
-        categoryImg: image
+        id: obj.id,
+        categoryName: "Fake category #{obj.id}",
+        categoryImg: obj.image
       }
     end
   end

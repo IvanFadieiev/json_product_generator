@@ -1,21 +1,35 @@
 require_relative '../helpers/product_data'
 require_relative '../helpers/image'
+require_relative './base_template'
 
-class ProductTemplate
+class ProductTemplate < BaseTemplate
+  include ProductData
+
+  attr_accessor :id_counter, :category_id, :product_name, :product_price, :image
+
+  def initialize(attrs = {})
+    @id_counter = attrs[:id_counter]
+    @category_id = attrs[:category_id]
+    @product_name = fake_name
+    @product_price = fake_price
+    @image = fake_image
+  end
+
   class << self
-    include Image
-    include ProductData
-
     def call(attrs = {})
-      id_counter = attrs[:id_counter]
-      category_id = attrs[:category_id]
+      obj = new(attrs)
+      template_for(obj)
+    end
 
+    private
+
+    def template_for(obj)
       {
-        id: id_counter,
-        categoryId: category_id,
-        productName: product_name,
-        productPrice: product_price,
-        productImg: image
+        id: obj.id_counter,
+        categoryId: obj.category_id,
+        productName: obj.product_name,
+        productPrice: obj.product_price,
+        productImg: obj.image
       }
     end
   end

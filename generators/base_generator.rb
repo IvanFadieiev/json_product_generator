@@ -1,6 +1,6 @@
 class BaseGenerator
   class << self
-    def call(params={})
+    def call(params = {})
       entity_count = params[:entity_count]
 
       (1).upto(entity_count).map do |i|

@@ -5,7 +5,7 @@ class ProductsGenerator < BaseGenerator
   class << self
     def call(params={})
       super(params)
-      $PRODUCTS_ARRAY.flatten!
+      ProductsArray.flatten!
     end
 
     private
@@ -14,7 +14,7 @@ class ProductsGenerator < BaseGenerator
       products_count = params[:products_count]
       category_id = params[:id]
 
-      $PRODUCTS_ARRAY << ProductsForCategoryGenerator.call(entity_count: products_count, category_id: category_id)
+      ProductsArray.add ProductsForCategoryGenerator.call(entity_count: products_count, category_id: category_id)
     end
   end
 end

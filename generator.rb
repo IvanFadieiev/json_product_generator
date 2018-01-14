@@ -2,7 +2,9 @@ require 'json'
 require 'faker'
 require 'byebug'
 
-Dir["#{File.dirname(__FILE__)}/generators/*.rb"].each { |file| load file }
+%w[generators singletons].each do |dir_name|
+  Dir["#{File.dirname(__FILE__)}/#{dir_name}/*.rb"].each { |file| load file }
+end
 
 class Generator
   class << self
@@ -10,11 +12,8 @@ class Generator
     PRODUCTS_COUNT = 10
     USERS_COUNT = 4
 
-    $ID_COUNTER = 0
-    $PRODUCTS_ARRAY = []
-
     def call
-      File.open("./example.json","w") do |f|
+      File.open('./example.json', 'w') do |f|
         f.write(file_structure.to_json)
       end
     end
@@ -24,7 +23,8 @@ class Generator
     def file_structure
       {
         categories: CategoriesGenerator.call(entity_count: CATEGORIES_COUNT),
-        products: ProductsGenerator.call(entity_count: CATEGORIES_COUNT, products_count: PRODUCTS_COUNT),
+        products: ProductsGenerator.call(entity_count: CATEGORIES_COUNT,
+                                         products_count: PRODUCTS_COUNT),
         users: UserGenerator.call(entity_count: USERS_COUNT)
       }
     end
