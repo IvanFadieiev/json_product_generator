@@ -13,7 +13,7 @@ To see json-server documentation just visit https://github.com/typicode/json-ser
 
 Now you are able to visit ```http://localhost:3000```
 
-You have the ability to manage **categories, products, users** entities with general CRUD
+You have the ability to manage **categories, products, users, discounts** entities with general CRUD
 
 e.g.
 

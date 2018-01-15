@@ -3,6 +3,7 @@ class Generator
     CATEGORIES_COUNT = CONFIG['CATEGORIES_COUNT'] || 1
     PRODUCTS_COUNT = CONFIG['PRODUCTS_COUNT'] || 1
     USERS_COUNT = CONFIG['USERS_COUNT'] || 1
+    DISCOUNT_COUNT = 1
 
     def call
       File.open('./json_files/example.json', 'w') do |f|
@@ -17,7 +18,8 @@ class Generator
         categories: CategoriesGenerator.call(entity_count: CATEGORIES_COUNT),
         products: ProductsGenerator.call(entity_count: CATEGORIES_COUNT,
                                          products_count: PRODUCTS_COUNT),
-        users: UserGenerator.call(entity_count: USERS_COUNT)
+        users: UserGenerator.call(entity_count: USERS_COUNT),
+        discounts: DiscountGenerator.call(entity_count: DISCOUNT_COUNT)
       }
     end
   end
