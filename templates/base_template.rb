@@ -1,5 +1,3 @@
-require_relative '../helpers/image'
-
 class BaseTemplate
   include Image
 

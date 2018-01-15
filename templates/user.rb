@@ -1,5 +1,3 @@
-require_relative './base_template'
-
 class UserTemplate < BaseTemplate
   attr_accessor :id, :avatar
 

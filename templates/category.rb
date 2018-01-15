@@ -1,5 +1,3 @@
-require_relative './base_template'
-
 class CategoryTemplate < BaseTemplate
   attr_accessor :id, :image
 

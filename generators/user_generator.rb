@@ -1,6 +1,3 @@
-require_relative 'base_generator'
-require_relative '../templates/user'
-
 class UserGenerator < BaseGenerator
   class << self
     private

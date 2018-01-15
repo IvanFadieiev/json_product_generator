@@ -1,6 +1,3 @@
-require_relative 'base_generator'
-require_relative '../generators/products_for_category_generator'
-
 class ProductsGenerator < BaseGenerator
   class << self
     def call(params={})

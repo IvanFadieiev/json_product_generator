@@ -1,6 +1,3 @@
-require_relative 'base_generator'
-require_relative '../templates/category'
-
 class CategoriesGenerator < BaseGenerator
   class << self
     private

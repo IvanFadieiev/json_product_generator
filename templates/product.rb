@@ -1,7 +1,3 @@
-require_relative '../helpers/product_data'
-require_relative '../helpers/image'
-require_relative './base_template'
-
 class ProductTemplate < BaseTemplate
   include ProductData
 
