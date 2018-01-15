@@ -1,5 +1,3 @@
-require_relative './base_singleton'
-
 class ProductsArray < BaseSingleton
   attr_accessor :array
 

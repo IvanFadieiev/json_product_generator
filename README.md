@@ -7,7 +7,7 @@
 3. Enter to the project directory ```cd json_product_generator```
 4. Fill **config/config.yaml** with proper values
 5. Run ```ruby execute.rb```
-6. Run ```json-server --watch example.json```
+6. Run ```json-server --watch json_files/example.json```
 
 To see json-server documentation just visit https://github.com/typicode/json-server
 

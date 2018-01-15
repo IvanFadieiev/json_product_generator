@@ -1,5 +1,3 @@
-require_relative './base_singleton'
-
 class IdCounter < BaseSingleton
   attr_accessor :id
 

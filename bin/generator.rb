@@ -5,7 +5,7 @@ class Generator
     USERS_COUNT = CONFIG['USERS_COUNT'] || 1
 
     def call
-      File.open('./example.json', 'w') do |f|
+      File.open('./json_files/example.json', 'w') do |f|
         f.write(file_structure.to_json)
       end
     end
